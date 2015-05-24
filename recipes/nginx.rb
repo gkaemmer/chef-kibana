@@ -27,7 +27,7 @@ template File.join(node['nginx']['dir'], 'sites-enabled', 'kibana') do
   )
 end
 
-if node['kibana']['nginx']['basic_auth']
+if node['kibana']['nginx']['auth']
   template node['kibana']['auth_file'] do
     variables(username: node['kibana']['nginx']['basic_auth_username'],
               password: node['kibana']['nginx']['basic_auth_password'])
