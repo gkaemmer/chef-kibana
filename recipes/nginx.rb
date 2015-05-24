@@ -29,6 +29,7 @@ end
 
 if node['kibana']['nginx']['auth']
   template node['kibana']['auth_file'] do
+    source 'htpasswd.erb'
     variables(username: node['kibana']['nginx']['basic_auth_username'],
               password: node['kibana']['nginx']['basic_auth_password'])
     owner node['nginx']['user']
