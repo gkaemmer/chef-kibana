@@ -2,7 +2,7 @@
 
 include_recipe 'nginx'
 
-template File.join(node['nginx']['dir'], 'sites-available', 'kibana') do
+template File.join(node['nginx']['dir'], 'sites-enabled', 'kibana') do
   source 'nginx.erb'
   owner node['nginx']['user']
   mode '0644'
@@ -27,6 +27,12 @@ template File.join(node['nginx']['dir'], 'sites-available', 'kibana') do
   )
 end
 
-nginx_site 'kibana' do
-  enable true
+if node['kibana']['nginx']['basic_auth']
+  template node['kibana']['auth_file'] do
+    variables(username: node['kibana']['nginx']['basic_auth_username'],
+              password: node['kibana']['nginx']['basic_auth_password'])
+    owner node['nginx']['user']
+    group node['nginx']['group']
+    mode 00644
+  end
 end

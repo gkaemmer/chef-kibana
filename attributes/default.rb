@@ -108,7 +108,10 @@ default['kibana']['nginx']['ssl_ciphers']         = 'ECDHE-RSA-RC4-SHA:ECDHE-RSA
 default['kibana']['nginx']['ssl_session_cache']   = 'shared:SSL:10m'
 #<> The SSL session timeout.
 default['kibana']['nginx']['ssl_session_timeout'] = '10m'
-
+#<> nginx http auth username
+default['kibana']['nginx']['basic_auth_username'] = 'admin'
+#<> nginx http auth password
+default['kibana']['nginx']['basic_auth_password'] = 'PLEASEchangeme'
 #<> The virtualhost server name.
 default['kibana']['nginx']['server_name'] = 'kibana'
 
