@@ -25,6 +25,8 @@ template File.join(node['nginx']['dir'], 'sites-enabled', 'kibana') do
     'auth'                => node['kibana']['nginx']['auth'],
     'auth_file'           => node['kibana']['auth_file']
   )
+
+  notifies :restart, 'service[nginx]'
 end
 
 if node['kibana']['nginx']['auth']
@@ -35,5 +37,7 @@ if node['kibana']['nginx']['auth']
     owner node['nginx']['user']
     group node['nginx']['group']
     mode 00644
+
+    notifies :restart, 'service[nginx]'
   end
 end
