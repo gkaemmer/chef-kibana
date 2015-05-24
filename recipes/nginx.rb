@@ -23,7 +23,8 @@ template File.join(node['nginx']['dir'], 'sites-enabled', 'kibana') do
     'proxy'               => node['kibana']['nginx']['proxy'],
     'kibana_service'      => node['kibana']['nginx']['kibana_service'],
     'auth'                => node['kibana']['nginx']['auth'],
-    'auth_file'           => node['kibana']['auth_file']
+    'auth_file'           => node['kibana']['auth_file'],
+    'es_server'           => node['kibana']['elasticsearch']['hosts'].first
   )
 
   notifies :restart, 'service[nginx]'
